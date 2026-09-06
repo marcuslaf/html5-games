@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HTML5 Games</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      background: #0f0f23;
+      font-family: 'Segoe UI', sans-serif;
+      color: #ffffff;
+    }
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 8px;
+      background: linear-gradient(135deg, #00ff88, #00a8ff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    p { color: #8888aa; margin-bottom: 40px; }
+    .games {
+      display: flex;
+      gap: 30px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .card {
+      background: #16213e;
+      border: 2px solid #333366;
+      border-radius: 12px;
+      padding: 30px;
+      text-align: center;
+      width: 220px;
+      transition: transform 0.2s, border-color 0.2s;
+    }
+    .card:hover {
+      transform: translateY(-5px);
+      border-color: #00a8ff;
+    }
+    .card .emoji { font-size: 3rem; margin-bottom: 15px; }
+    .card h2 { font-size: 1.3rem; margin-bottom: 10px; }
+    .card a {
+      display: inline-block;
+      margin-top: 10px;
+      padding: 10px 24px;
+      background: linear-gradient(135deg, #00a8ff, #0055ff);
+      color: #fff;
+      text-decoration: none;
+      border-radius: 8px;
+      font-weight: bold;
+      font-size: 0.95rem;
+    }
+    .card a:hover { opacity: 0.85; }
+  </style>
+</head>
+<body>
+  <h1>HTML5 Games</h1>
+  <p>Jogos feitos com HTML, CSS e JavaScript puro</p>
+  <div class="games">
+    <div class="card">
+      <div class="emoji">🐍</div>
+      <h2>Snake Game</h2>
+      <a href="snake-game.html">Jogar</a>
+    </div>
+    <div class="card">
+      <div class="emoji">🧱</div>
+      <h2>Breakout Game</h2>
+      <a href="breakout-game.html">Jogar</a>
+    </div>
+  </div>
+</body>
+</html>
