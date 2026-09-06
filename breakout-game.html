@@ -52,7 +52,7 @@
     let paddleDir = 0; // -1 esquerda, 0 parado, 1 direita
 
     // ---------- Bola ----------
-    const ball = { r: 6, x: W / 2, y: H - 40, dx: 4, dy: -4, speed: 4 };
+    const ball = { r: 6, x: W / 2, y: H - 40, dx: 4, dy: -4, speed: 4, baseSpeed: 4 };
 
     // ---------- Tijolos ----------
     const brickRows = 5;
@@ -72,6 +72,8 @@
     ];
 
     let bricks = [];
+    let rowsCleared = 0;
+    const speedIncrement = 0.6;
 
     function createBricks() {
       bricks = [];
@@ -125,6 +127,7 @@
     function resetBall() {
       ball.x = W / 2;
       ball.y = H - 40;
+      ball.speed = ball.baseSpeed;
       const angle = -Math.PI / 2 + (Math.random() - 0.5) * 0.8;
       ball.dx = ball.speed * Math.cos(angle);
       ball.dy = ball.speed * Math.sin(angle);
@@ -133,6 +136,7 @@
     function startGame() {
       score = 0;
       lives = 3;
+      rowsCleared = 0;
       paddle.x = (W - paddle.w) / 2;
       createBricks();
       resetBall();
@@ -218,6 +222,21 @@
             ball.dy = -ball.dy;
           }
           break; // apenas um tijolo por frame
+        }
+      }
+
+      // Verificar se alguma linha foi completamente destruída
+      for (let r = 0; r < brickRows; r++) {
+        const rowBricks = bricks.filter((b) => b.row === r);
+        if (rowBricks.length > 0 && rowBricks.every((b) => !b.alive)) {
+          if (!rowBricks[0].cleared) {
+            rowBricks.forEach((b) => (b.cleared = true));
+            rowsCleared++;
+            ball.speed = ball.baseSpeed + rowsCleared * speedIncrement;
+            const currentAngle = Math.atan2(ball.dy, ball.dx);
+            ball.dx = ball.speed * Math.cos(currentAngle);
+            ball.dy = ball.speed * Math.sin(currentAngle);
+          }
         }
       }
 
